@@ -6,6 +6,7 @@ coverage/
 *.tsbuildinfo
 
 # local env / editor / OS
+.claude/worktrees/
 *.local
 .env*
 .DS_Store
