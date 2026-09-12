@@ -1,0 +1,36 @@
+{
+  "name": "shot-tracer",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Broadcast-style golf shot tracer that runs entirely in your browser. Your video never leaves your device.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev:host": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json",
+    "lint": "biome check .",
+    "fix": "biome check --write .",
+    "format": "biome format --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "eval": "node tools/eval/cli.ts",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run build && npm run eval"
+  },
+  "dependencies": {
+    "preact": "^10.29.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.13",
+    "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^24.13.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.0"
+  }
+}
