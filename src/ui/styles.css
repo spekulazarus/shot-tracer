@@ -16,3 +16,57 @@ main {
   margin: 0 auto;
   padding: 2rem 1rem;
 }
+
+a {
+  color: #9fd8b0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid #22382a;
+}
+
+code,
+pre {
+  font-size: 0.8rem;
+  color: #b7c9bc;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid #3c6b4c;
+  background: #173424;
+  color: inherit;
+}
+
+.muted {
+  color: #8aa393;
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+
+.ok {
+  color: #7ee29b;
+}
+
+.warn {
+  color: #f0c36b;
+}
+
+.bad {
+  color: #ff8a80;
+}
