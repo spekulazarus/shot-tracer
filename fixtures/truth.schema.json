@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/spekulazarus/shot-tracer/blob/main/fixtures/truth.schema.json",
+  "title": "shot-tracer ground truth",
+  "description": "Hand-labelled ball positions for one fixture clip. See docs/TESTING.md for the labelling protocol and coordinate conventions.",
+  "type": "object",
+  "required": ["schemaVersion", "clip", "meta", "events", "points"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "clip": {
+      "type": "object",
+      "required": ["file", "width", "height", "fps", "frameCount"],
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Video file name, relative to this truth.json. Videos are gitignored and never committed."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of the video file, so a label set is tied to exactly one encode."
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Display width in px, i.e. after applying the container's rotation metadata."
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Display height in px, after rotation."
+        },
+        "fps": { "type": "number", "exclusiveMinimum": 0 },
+        "frameCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of decoded frames in presentation order."
+        },
+        "source": {
+          "type": "string",
+          "description": "Free text: device, camera app, original file name, trimming command."
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["view", "mount", "background"],
+      "additionalProperties": false,
+      "properties": {
+        "view": {
+          "enum": ["down-the-line", "face-on", "other"],
+          "description": "Camera position relative to the target line."
+        },
+        "mount": { "enum": ["tripod", "handheld"] },
+        "background": {
+          "enum": ["sky", "treeline", "mixed", "other"],
+          "description": "What the ball flies against for most of the labelled frames."
+        },
+        "labeler": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "events": {
+      "type": "object",
+      "required": ["impactFrame", "lostFrame", "landing"],
+      "additionalProperties": false,
+      "properties": {
+        "impactFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "First frame on which the ball has left its resting position."
+        },
+        "lostFrame": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Last frame on which a human can still locate the ball. null if it never disappears within the clip."
+        },
+        "landing": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "required": ["frame", "x", "y"],
+              "additionalProperties": false,
+              "properties": {
+                "frame": {
+                  "type": ["integer", "null"],
+                  "description": "Frame of landing if it is inside the clip, else null."
+                },
+                "x": { "type": "number" },
+                "y": { "type": "number" }
+              }
+            }
+          ],
+          "description": "Where the ball came down, in the coordinates of `frame` (or of the last frame if frame is null). null if unknown."
+        }
+      }
+    },
+    "points": {
+      "type": "array",
+      "description": "Ball centre per frame, strictly increasing frame index. Frames between impactFrame and lostFrame that are absent are treated as unlabelled, not as 'ball absent'.",
+      "items": {
+        "type": "object",
+        "required": ["frame", "x", "y", "visibility"],
+        "additionalProperties": false,
+        "properties": {
+          "frame": { "type": "integer", "minimum": 0 },
+          "x": {
+            "type": "number",
+            "description": "Display-oriented source pixels; origin is the top-left corner of the image, so the centre of the top-left pixel is (0.5, 0.5)."
+          },
+          "y": { "type": "number" },
+          "visibility": {
+            "enum": ["visible", "uncertain"],
+            "description": "uncertain = labeller's best guess; excluded from error metrics."
+          }
+        }
+      }
+    }
+  }
+}

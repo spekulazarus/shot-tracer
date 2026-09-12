@@ -1,0 +1,33 @@
+{
+  "$schema": "../truth.schema.json",
+  "schemaVersion": 1,
+  "clip": {
+    "file": "clip.mov",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "frameCount": 180,
+    "source": "Illustrative only — there is no video for this fixture. It documents the format and keeps the validator honest."
+  },
+  "meta": {
+    "view": "down-the-line",
+    "mount": "tripod",
+    "background": "sky",
+    "labeler": "example",
+    "notes": "Numbers are made up."
+  },
+  "events": {
+    "impactFrame": 40,
+    "lostFrame": 47,
+    "landing": { "frame": null, "x": 1010.0, "y": 610.0 }
+  },
+  "points": [
+    { "frame": 40, "x": 962.5, "y": 905.5, "visibility": "visible" },
+    { "frame": 41, "x": 964.0, "y": 861.0, "visibility": "visible" },
+    { "frame": 42, "x": 965.5, "y": 820.5, "visibility": "visible" },
+    { "frame": 43, "x": 967.0, "y": 783.0, "visibility": "visible" },
+    { "frame": 44, "x": 968.5, "y": 749.5, "visibility": "visible" },
+    { "frame": 46, "x": 971.5, "y": 692.0, "visibility": "uncertain" },
+    { "frame": 47, "x": 973.0, "y": 668.5, "visibility": "uncertain" }
+  ]
+}
