@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.mov binary
+*.mp4 binary
+*.png binary
+*.jpg binary
+*.wasm binary

@@ -1,0 +1,27 @@
+# dependencies & build output
+node_modules/
+dist/
+coverage/
+.wrangler/
+*.tsbuildinfo
+
+# local env / editor / OS
+*.local
+.env*
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# evaluation output
+eval-out/
+
+# Fixture videos are large and never committed; truth.json files are.
+fixtures/**/*.mov
+fixtures/**/*.MOV
+fixtures/**/*.mp4
+fixtures/**/*.MP4
+fixtures/**/*.m4v
+fixtures/**/*.webm
+# Synthetic fixtures are regenerated deterministically (M1).
+fixtures/synthetic/
